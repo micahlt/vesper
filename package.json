@@ -1,0 +1,27 @@
+{
+  "name": "vesper",
+  "version": "1.0.0",
+  "description": "Fast and easy YouTube downloader powered by Vercel",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/micahlt/vesper.git"
+  },
+  "keywords": [
+    "youtube-dl",
+    "youtube",
+    "downloader"
+  ],
+  "author": "Micah Lindley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/micahlt/vesper/issues"
+  },
+  "homepage": "https://github.com/micahlt/vesper#readme",
+  "dependencies": {
+    "youtube-dl-exec": "^1.2.4"
+  }
+}

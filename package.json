@@ -22,6 +22,6 @@
   },
   "homepage": "https://github.com/micahlt/vesper#readme",
   "dependencies": {
-    "youtube-dl-exec": "^1.2.4"
+    "ytdl-core": "^4.8.2"
   }
 }

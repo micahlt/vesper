@@ -1,18 +1,11 @@
-const ytdl = require('youtube-dl-exec');
+const ytdl = require('ytdl-core');
 
 module.exports = (req, res) => {
   if (req.query.v) {
-    ytdl(req.query.v, {
-      dumpSingleJson: true,
-      noWarnings: true,
-      noCallHome: true,
-      noCheckCertificate: true,
-      preferFreeFormats: true,
-      youtubeSkipDashManifest: true,
-    })
-    .then((data) => {
-      res.send(data);
-    })
+    ytdl.getInfo(req.query.v)
+      .then((data) => {
+        res.send(data);
+      })
   } else {
     res.send(400);
   }

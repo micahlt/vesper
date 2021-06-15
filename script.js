@@ -35,8 +35,7 @@ const formatBytes = (bytes, decimals = 2) => {
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
-const generateVideo = (obj, title, creator, thumb, duration) => {
-  console.log([title, creator, thumb, duration])
+const generateVideo = (obj, title, creator, thumb) => {
   if (title.length > 30) {
     title = title.slice(0, 20) + '...';
   }
@@ -49,9 +48,9 @@ const generateVideo = (obj, title, creator, thumb, duration) => {
       <h2>${title}</h2>
       <p class="author">by ${creator}</p>
       <ul>
-        <li><span class="material-icons">watch_later</span> ${fancyTimeFormat(duration)}</li>
-        <li><span class="material-icons">video_settings</span> ${obj.ext.toUpperCase()}</li>
-        <li><span class="material-icons">save</span> ${formatBytes(obj.filesize)}</li>
+        <li><span class="material-icons">watch_later</span> ${fancyTimeFormat(obj.approxDurationMs / 1000)}</li>
+        <li><span class="material-icons">video_settings</span> ${obj.container.toUpperCase()}</li>
+        <li><span class="material-icons">save</span> ${formatBytes(obj.contentLength)}</li>
         <li><span class="material-icons">fit_screen</span> ${obj.width}x${obj.height}</li>
       </ul>
     </div>`;
@@ -82,14 +81,10 @@ const download = (url) => {
       }
       loader.style.display = "none";
       data.formats.forEach((item) => {
-        if (item.asr == null || item.width == null || item.height == null) {
+        if (!(item.hasVideo && item.hasAudio)) {
           return;
         }
-        if (data.creator) {
-          generateVideo(item, data.title, data.creator, data.thumbnail, data.duration);
-        } else {
-          generateVideo(item, data.title, data.channel, data.thumbnail, data.duration);
-        }
+        generateVideo(item, data.videoDetails.title, data.videoDetails.ownerChannelName, data.videoDetails.thumbnails[1].url);
       });
       another.style.display = "block";
     });

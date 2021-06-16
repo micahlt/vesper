@@ -241,3 +241,49 @@ li .material-icons {
     box-shadow: 0 2.5em 0 0;
   }
 }
+
+.footer {
+  position: absolute;
+  bottom: 1em;
+  right: 0.3em;
+  font-size: 0.9em;
+}
+
+.footer a {
+  padding: 1em;
+  color: #3f37c9;
+  text-decoration: none;
+}
+
+#privacy {
+  line-height: 1.35em;
+  display: none;
+  background: white;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50vw;
+  max-width: 60em;
+  border-radius: 5px;
+  padding: 2em;
+  box-shadow:
+    0 2.3px 3.3px rgba(0, 0, 0, 0.034),
+    0 5.9px 8.3px rgba(0, 0, 0, 0.049),
+    0 12.1px 17px rgba(0, 0, 0, 0.061),
+    0 24.8px 35px rgba(0, 0, 0, 0.076),
+    0 68px 96px rgba(0, 0, 0, 0.11);
+}
+
+h3 {
+  text-align: center;
+}
+
+.fullwidth {
+  width: 100%;
+  display: flex;
+}
+
+#closePrivacy {
+  margin: auto;
+}

@@ -4,6 +4,9 @@ const downloader = document.getElementsByClassName("form")[0];
 const loader = document.getElementsByClassName("loader")[0];
 const render = document.getElementById("render-vids");
 const another = document.getElementById("another");
+const privacyBtn = document.getElementById("privacyBtn");
+const privacyPanel = document.getElementById("privacy");
+const closeBtn = document.getElementById("closePrivacy");
 const fakeButton = (url) => {
   const a = document.createElement('a');
   a.href = url;
@@ -102,4 +105,12 @@ submit.addEventListener("click", function() {
 
 another.addEventListener("click", function() {
   window.location.reload();
-})
+});
+
+privacyBtn.addEventListener("click", function() {
+  privacyPanel.style.display = "block";
+});
+
+closeBtn.addEventListener("click", function() {
+  privacyPanel.style.display = "none";
+});

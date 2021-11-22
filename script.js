@@ -10,7 +10,7 @@ const closeBtn = document.getElementById("closePrivacy");
 const fakeButton = (url) => {
   const a = document.createElement('a');
   a.href = url;
-  a.download = url;
+  a.download = url.split('/').pop();
   a.style.display = "none";
   a.target = "blank";
   document.body.appendChild(a);
@@ -39,11 +39,24 @@ const formatBytes = (bytes, decimals = 2) => {
   return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
 }
 const generateVideo = (obj, title, creator, thumb) => {
+  let dimensions;
+  if (obj.width && obj.height) {
+    dimensions = `${obj.width}x${obj.height}`;
+  } else {
+    dimensions = `Audio file`;
+  }
   if (title.length > 30) {
     title = title.slice(0, 20) + '...';
   }
   if (creator.length > 30) {
     creator = creator.slice(0, 20) + '...';
+  }
+  if (dimensions == 'Audio file') {
+    obj.container = obj.codecs;
+    if (obj.codecs.includes('mp4a')) {
+      obj.container = 'M4A';
+    }
+    thumb = '/audio.png';
   }
   const template = `
     <img src="${thumb}" alt="video thumbnail">
@@ -54,7 +67,8 @@ const generateVideo = (obj, title, creator, thumb) => {
         <li><span class="material-icons">watch_later</span> ${fancyTimeFormat(obj.approxDurationMs / 1000)}</li>
         <li><span class="material-icons">video_settings</span> ${obj.container.toUpperCase()}</li>
         <li><span class="material-icons">save</span> ${formatBytes(obj.contentLength)}</li>
-        <li><span class="material-icons">fit_screen</span> ${obj.width}x${obj.height}</li>
+        <li><span class="material-icons">fit_screen</span>
+        ${dimensions}</li>
       </ul>
     </div>`;
   let newHTML = document.createElement("div");
@@ -84,7 +98,7 @@ const download = (url) => {
       }
       loader.style.display = "none";
       data.formats.forEach((item) => {
-        if (!(item.hasVideo && item.hasAudio)) {
+        if (item.hasVideo && !item.hasAudio) {
           return;
         }
         generateVideo(item, data.videoDetails.title, data.videoDetails.ownerChannelName, data.videoDetails.thumbnails[1].url);

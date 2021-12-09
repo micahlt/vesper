@@ -256,9 +256,11 @@ li .material-icons {
 
 .footer {
   position: absolute;
-  bottom: 1em;
-  right: 0.3em;
+  bottom: 0;
+  left: 0;
   font-size: 0.9em;
+  width: 100%;
+  text-align: right;
 }
 
 .footer a {
@@ -342,4 +344,10 @@ h3 {
   .data p {
     color: #887da9;
   }
+}
+
+.footer > span {
+  float: left;
+  padding-left: 1em;
+  transform: translateY(-10px);
 }

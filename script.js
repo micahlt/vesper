@@ -1,3 +1,5 @@
+let darkMode = false;
+const allLogos = Array.from(document.getElementsByClassName("vesper-logo"));
 const textField = document.getElementsByClassName("input")[0];
 const submit = document.getElementById("submit");
 const downloader = document.getElementsByClassName("form")[0];
@@ -7,16 +9,25 @@ const another = document.getElementById("another");
 const privacyBtn = document.getElementById("privacyBtn");
 const privacyPanel = document.getElementById("privacy");
 const closeBtn = document.getElementById("closePrivacy");
+if (
+  window.matchMedia &&
+  window.matchMedia("(prefers-color-scheme: dark)").matches
+) {
+  darkMode = true;
+}
+allLogos.forEach((logo) => {
+  logo.src = darkMode ? "/assets/Vesper-dark.png" : "/assets/Vesper-light.png";
+});
 const fakeButton = (url) => {
-  const a = document.createElement('a');
+  const a = document.createElement("a");
   a.href = url;
-  a.download = url.split('/').pop();
+  a.download = url.split("/").pop();
   a.style.display = "none";
   a.target = "blank";
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
-}
+};
 const fancyTimeFormat = (duration) => {
   var hrs = ~~(duration / 3600);
   var mins = ~~((duration % 3600) / 60);
@@ -28,16 +39,16 @@ const fancyTimeFormat = (duration) => {
   ret += "" + mins + ":" + (secs < 10 ? "0" : "");
   ret += "" + secs;
   return ret;
-}
+};
 const formatBytes = (bytes, decimals = 2) => {
-  if (!bytes) return 'Unknown size'
-  if (bytes === 0) return '0 Bytes';
+  if (!bytes) return "Unknown size";
+  if (bytes === 0) return "0 Bytes";
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
-  const sizes = ['bytes', 'KB', 'MB', 'GB'];
+  const sizes = ["bytes", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
-  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
-}
+  return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i];
+};
 const generateVideo = (obj, title, creator, thumb) => {
   let dimensions;
   if (obj.width && obj.height) {
@@ -46,17 +57,17 @@ const generateVideo = (obj, title, creator, thumb) => {
     dimensions = `Audio file`;
   }
   if (title.length > 30) {
-    title = title.slice(0, 20) + '...';
+    title = title.slice(0, 20) + "...";
   }
   if (creator.length > 30) {
-    creator = creator.slice(0, 20) + '...';
+    creator = creator.slice(0, 20) + "...";
   }
-  if (dimensions == 'Audio file') {
+  if (dimensions == "Audio file") {
     obj.container = obj.codecs;
-    if (obj.codecs.includes('mp4a')) {
-      obj.container = 'M4A';
+    if (obj.codecs.includes("mp4a")) {
+      obj.container = "M4A";
     }
-    thumb = '/audio.png';
+    thumb = "/audio.png";
   }
   const template = `
     <img src="${thumb}" alt="video thumbnail">
@@ -64,9 +75,13 @@ const generateVideo = (obj, title, creator, thumb) => {
       <h2>${title}</h2>
       <p class="author">by ${creator}</p>
       <ul>
-        <li><span class="material-icons">watch_later</span> ${fancyTimeFormat(obj.approxDurationMs / 1000)}</li>
+        <li><span class="material-icons">watch_later</span> ${fancyTimeFormat(
+          obj.approxDurationMs / 1000
+        )}</li>
         <li><span class="material-icons">video_settings</span> ${obj.container.toUpperCase()}</li>
-        <li><span class="material-icons">save</span> ${formatBytes(obj.contentLength)}</li>
+        <li><span class="material-icons">save</span> ${formatBytes(
+          obj.contentLength
+        )}</li>
         <li><span class="material-icons">fit_screen</span>
         ${dimensions}</li>
       </ul>
@@ -79,7 +94,7 @@ const generateVideo = (obj, title, creator, thumb) => {
   newHTML.addEventListener("click", () => {
     fakeButton(obj.url);
   });
-}
+};
 const download = (url) => {
   downloader.style.display = "none";
   loader.style.display = "inherit";
@@ -93,7 +108,7 @@ const download = (url) => {
     })
     .then((data) => {
       if (data == 1) {
-        alert('Error!');
+        alert("Error!");
         return;
       }
       loader.style.display = "none";
@@ -101,30 +116,35 @@ const download = (url) => {
         if (item.hasVideo && !item.hasAudio) {
           return;
         }
-        generateVideo(item, data.videoDetails.title, data.videoDetails.ownerChannelName, data.videoDetails.thumbnails[1].url);
+        generateVideo(
+          item,
+          data.videoDetails.title,
+          data.videoDetails.ownerChannelName,
+          data.videoDetails.thumbnails[1].url
+        );
       });
       another.style.display = "block";
     });
-}
+};
 
-textField.addEventListener("keyup", function(event) {
+textField.addEventListener("keyup", function (event) {
   if (event.key === "Enter") {
     download(textField.value);
   }
 });
 
-submit.addEventListener("click", function() {
+submit.addEventListener("click", function () {
   download(textField.value);
 });
 
-another.addEventListener("click", function() {
+another.addEventListener("click", function () {
   window.location.reload();
 });
 
-privacyBtn.addEventListener("click", function() {
+privacyBtn.addEventListener("click", function () {
   privacyPanel.style.display = "block";
 });
 
-closeBtn.addEventListener("click", function() {
+closeBtn.addEventListener("click", function () {
   privacyPanel.style.display = "none";
 });

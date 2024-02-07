@@ -1,51 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Vesper Downloader</title>
+    <meta
+      name="description"
+      content="Vesper is a YouTube downloader that is simple, safe, and reliable.  Powered by Vercel and Youtube-Dl-Core"
+    />
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;800&family=Material+Icons&display=swap"
+      rel="stylesheet"
+    />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width">
-  <title>Vesper Downloader</title>
-  <meta name="description" content="Vesper is a YouTube downloader that is simple, safe, and reliable.  Powered by Vercel and Youtube-Dl-Core">
-  <link href="style.css" rel="stylesheet" type="text/css" />
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Epilogue:wght@400;800&family=Material+Icons&display=swap" rel="stylesheet">
-</head>
-
-<body>
-  <div class="main">
-    <h1>Vesper</h1><br>
-    <p>a safe and easy YouTube downloader</p>
-    <br>
-    <div class="loader">
-      Loading...
+  <body>
+    <div class="main">
+      <img class="vesper-logo header-logo" /><br />
+      <p>a safe and easy YouTube downloader</p>
+      <br />
+      <div class="loader">Loading...</div>
+      <div class="form">
+        <input type="text" placeholder="any YouTube URL..." class="input" />
+        <a id="submit" class="submit" href="#">Download</a>
+      </div>
+      <div id="another">
+        <a href="#" class="submit">Download another</a>
+      </div>
+      <div id="render-vids"></div>
     </div>
-    <div class="form">
-      <input type="text" placeholder="any YouTube URL..." class="input">
-      <a id="submit" class="submit" href="#">Download</a>
+    <div id="privacy">
+      <h3>Privacy Policy</h3>
+      <br />
+      <p>
+        This service is provided at no cost by Micah Lindley, also known as
+        <a href="https://github.com/micahlt">micahlt</a> on some platforms. This
+        service does not utilize cookies beyond the defaults provided by
+        <a href="https://vercel.app/">Vercel</a>. No cross-site tracking is
+        enforced and the service does not record any of your social accounts, IP
+        addresses, or other fingerprinting information. We will not sell any of
+        your data. The only information sent to our servers is the URL of the
+        video you are attempting to download.<br /><br />
+      </p>
+      <div class="fullwidth">
+        <a href="#" class="submit" id="closePrivacy">Okay</a>
+      </div>
     </div>
-    <div id="another">
-      <a href="#" class="submit">Download another</a>
+    <div class="footer">
+      <a
+        class="github-button"
+        href="https://github.com/micahlt/vesper"
+        data-color-scheme="no-preference: light; light: light; dark: dark;"
+        data-show-count="true"
+        aria-label="Star micahlt/vesper on GitHub"
+        data-size="large"
+        >Star</a
+      >
+      <a href="#" id="privacyBtn">Privacy Policy</a>
+      <a href="https://www.buymeacoffee.com/micahlt" target="_blank">Support</a>
     </div>
-    <div id="render-vids">
-    </div>
-  </div>
-  <div id="privacy">
-    <h3>Privacy Policy</h3><br>
-    <p>This service is provided at no cost by Micah Lindley, also known as <a href="https://github.com/micahlt">micahlt</a> on some platforms. This service does not utilize cookies beyond the defaults provided by <a
-        href="https://vercel.app/">Vercel</a>. No cross-site tracking is enforced and the service does not record any of your social accounts, IP addresses, or other fingerprinting information. We will not sell any of your data. The only information
-      sent to our servers is the URL of the video you are attempting to download.<br><br>
-    </p>
-    <div class="fullwidth">
-      <a href="#" class="submit" id="closePrivacy">Okay</a>
-    </div>
-  </div>
-  <div class="footer">
-    <a class="github-button" href="https://github.com/micahlt/vesper" data-color-scheme="no-preference: light; light: light; dark: dark;" data-show-count="true" aria-label="Star micahlt/vesper on GitHub" data-size="large">Star</a>
-    <a href="#" id="privacyBtn">Privacy Policy</a>
-    <a href="https://www.buymeacoffee.com/micahlt" target="_blank">Support</a>
-  </div>
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <script src="script.js"></script>
-</body>
-
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>
